@@ -53,7 +53,7 @@ static bool button_up(debounce_t *d) {
     return button_fell(d);
 }
 
-#define LONG_PRESS_DURATION (2000)
+#define LONG_PRESS_DURATION (200)
 #define LONG_PRESS_REPEAT (50)
 
 static uint32_t millis() {
