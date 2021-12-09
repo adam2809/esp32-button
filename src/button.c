@@ -92,12 +92,12 @@ static void button_task(void *pvParameter)
     }
 }
 
-QueueHandle_t button_init(unsigned long long pin_select) {
-    return pulled_button_init(pin_select, GPIO_FLOATING);
+QueueHandle_t button_init(unsigned long long pin_select,bool is_active_low) {
+    return pulled_button_init(pin_select, GPIO_FLOATING,is_active_low);
 }
 
 
-QueueHandle_t pulled_button_init(unsigned long long pin_select, gpio_pull_mode_t pull_mode)
+QueueHandle_t pulled_button_init(unsigned long long pin_select, gpio_pull_mode_t pull_mode,bool is_active_low)
 {
     if (pin_count != -1) {
         ESP_LOGI(TAG, "Already initialized");
@@ -132,7 +132,7 @@ QueueHandle_t pulled_button_init(unsigned long long pin_select, gpio_pull_mode_t
             ESP_LOGI(TAG, "Registering button input: %d", pin);
             debounce[idx].pin = pin;
             debounce[idx].down_time = 0;
-            debounce[idx].inverted = true;
+            debounce[idx].inverted = is_active_low;
             if (debounce[idx].inverted) debounce[idx].history = 0xffff;
             idx++;
         }
