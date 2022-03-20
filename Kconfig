@@ -1,0 +1,12 @@
+menu "Buttons configuration"
+    config LEFT_BUTTON_PIN
+        int "Set left button pin"
+        default 39
+        help
+            Set left button pin
+    config RIGHT_BUTTON_PIN
+        int "Set right button pin"
+        default 36
+        help
+            Set right button pin
+endmenu
